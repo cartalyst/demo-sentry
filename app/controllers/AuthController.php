@@ -55,7 +55,7 @@ class AuthController extends BaseController {
 		{
 			$delay = $e->getDelay();
 
-			$error = "Your account is blocked for {$delay} second(s).";
+			$errors = "Your account is blocked for {$delay} second(s).";
 		}
 
 		return Redirect::back()->withInput()->withErrors($errors);

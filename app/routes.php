@@ -78,9 +78,7 @@ Route::get('reactivate', function()
 
 	$activation = Activation::exists($user) ?: Activation::create($user);
 
-	$code = $activation->code;
-
-	$sent = Mail::send('sentry.emails.activate', compact('user', 'code'), function($m) use ($user)
+	$sent = Mail::send('sentry.emails.activate', compact('user', 'activation'), function($m) use ($user)
 	{
 		$m->to($user->email)->subject('Activate Your Account');
 	});
@@ -91,7 +89,7 @@ Route::get('reactivate', function()
 	}
 
 	return Redirect::to('wait');
-})->where('id', '\d+');
+});
 
 Route::get('deactivate', function()
 {
